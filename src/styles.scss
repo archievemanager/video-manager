@@ -1,0 +1,219 @@
+/* ================================================
+   GLOBAL STYLES (Angular + Bootstrap 5/6 compatible)
+   ------------------------------------------------
+   ✅ Uses modern @use syntax
+   ✅ All theme variables defined before imports
+   ✅ Clean structure for readability and reusability
+=================================================== */
+
+/* --------------------------------
+   1. Theme Variables
+---------------------------------- */
+$theme-colors: (
+  "primary": #3b82f6,
+  "primary-light": #60a5fa,
+  "primary-dark": #2563eb,
+  "secondary": #64748b,
+  "success": #22c55e,
+  "info": #0dcaf0,
+  "danger": #ef4444,
+  "warning": #f59e0b
+);
+
+$shadow: rgba(0, 0, 0, 0.2);
+
+$custom-colors: (
+  "border": #e2e8f0,
+  "text": #4a5568,
+  "background": #ffffff
+);
+
+/* --------------------------------
+   2. Sass Modules and Bootstrap
+---------------------------------- */
+@use "sass:map";
+@use "bootstrap" as *;
+
+/* --------------------------------
+   3. Global Resets and Body
+---------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f8fafc;
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: map-get($custom-colors, "text");
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* --------------------------------
+   4. Password Prompt Overlay
+---------------------------------- */
+.password-prompt-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.password-prompt-box {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 400px;
+}
+
+/* --------------------------------
+   5. Video Preview Styling
+---------------------------------- */
+video {
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: #000;
+  width: 100%;
+  height: auto;
+}
+
+/* --------------------------------
+   6. Tabs Navigation Override
+---------------------------------- */
+.nav-tabs {
+  border-bottom: none;
+  gap: 0.25rem;
+}
+
+.nav-tabs .nav-link {
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  color: map-get($custom-colors, "text");
+  background: #fff;
+  transition: all 0.2s;
+}
+
+.nav-tabs .nav-link:hover {
+  background: #e6fffa;
+  color: #234e52;
+}
+
+.nav-tabs .nav-link.active {
+  background: map-get($theme-colors, "primary-dark");
+  color: #fff;
+  font-weight: 600;
+}
+
+/* --------------------------------
+   7. Form Controls
+---------------------------------- */
+.form-control,
+.form-select,
+.form-control:not(output) {
+  border-radius: 0.5rem;
+  border: 1.5px solid #cbd5e0;
+  // padding: 0.5rem 1rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: map-get($theme-colors, "primary-dark");
+  box-shadow: 0 0 0 0.2rem rgba(49, 151, 149, 0.25);
+}
+
+/* --------------------------------
+   8. Tables
+---------------------------------- */
+.table {
+  margin-bottom: 0;
+  border-collapse: separate;
+  border-spacing: 0 0.5rem;
+}
+
+.table th {
+  background: #f7fafc;
+  font-weight: 600;
+  border-top: none;
+}
+
+.table td {
+  background: #fff;
+  vertical-align: middle;
+}
+
+/* --------------------------------
+   9. Buttons
+---------------------------------- */
+.btn {
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+}
+
+/* --------------------------------
+   10. Progress Bar
+---------------------------------- */
+.progress {
+  height: 1.5rem;
+  border-radius: 0.75rem;
+  background-color: #e2e8f0;
+}
+
+.progress-bar {
+  background-color: map-get($theme-colors, "primary-dark");
+}
+
+/* --------------------------------
+   11. List Groups
+---------------------------------- */
+.list-group-item {
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: 1.5px solid map-get($custom-colors, "border");
+  background: #fff;
+  transition: all 0.2s;
+}
+
+.list-group-item:hover {
+  background: #f8fafc;
+}
+
+/* --------------------------------
+   12. Utility / Shadow Helpers
+---------------------------------- */
+.shadow-sm {
+  box-shadow: 0 2px 4px $shadow !important;
+}
+
+.shadow-md {
+  box-shadow: 0 4px 6px $shadow !important;
+}
+
+.shadow-lg {
+  box-shadow: 0 10px 25px $shadow !important;
+}

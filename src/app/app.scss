@@ -1,0 +1,193 @@
+@use 'sass:color';
+@use 'sass:map';
+@use '../styles.scss' as styles;
+
+/* Side-by-side layout for metadata tab */
+.metadata-flex {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: flex-start;
+}
+.metadata-flex > div {
+  flex: 1 1 0;
+  min-width: 0;
+}
+@media (max-width: 991px) {
+  .metadata-flex {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+// Component Styles
+.container {
+  max-width: 1600px;
+  padding: 1.5rem;
+  margin: 0 auto;
+}
+
+// Header Styles
+header {
+  background: linear-gradient(
+    135deg,
+    map.get(styles.$theme-colors, 'primary') 0%,
+    map.get(styles.$theme-colors, 'primary-dark') 100%
+  );
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 1rem;
+
+  h1 {
+    color: white;
+    font-size: 2rem;
+    margin: 0;
+    text-shadow: 0 2px 4px styles.$shadow;
+  }
+
+  p {
+    color: color.adjust(white, $alpha: -0.1);
+    font-size: 1rem;
+    margin: 0.5rem 0 0;
+  }
+}
+
+// Tab Content
+.tab-content {
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px styles.$shadow;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border: 1px solid map.get(styles.$custom-colors, 'border');
+  transition: box-shadow 0.2s, border-color 0.2s;
+
+  h2.h5 {
+    font-size: 1.5rem;
+    color: map.get(styles.$theme-colors, 'primary');
+    border-bottom: 2px solid map.get(styles.$theme-colors, 'primary-light');
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  &:focus-within,
+  &:hover {
+    box-shadow: 0 12px 40px color.adjust(map.get(styles.$theme-colors, 'primary'), $alpha: -0.87),
+      0 2px 12px color.adjust(black, $alpha: -0.92);
+    border-color: color.adjust(map.get(styles.$theme-colors, 'primary-light'), $lightness: 20%);
+  }
+
+  h2,
+  h5,
+  h6 {
+    color: color.adjust(map.get(styles.$theme-colors, 'primary-dark'), $blackness: 20%);
+    font-weight: 600;
+  }
+
+  p {
+    color: map.get(styles.$custom-colors, 'text');
+  }
+
+  .form-control,
+  input,
+  textarea,
+  select {
+    border-radius: 0.5rem;
+    border: 1.5px solid map.get(styles.$custom-colors, 'border');
+    font-size: 1.08rem;
+    // margin-bottom: 1rem;
+    background: map.get(styles.$custom-colors, 'background');
+    transition: border-color 0.2s;
+
+    &:focus {
+      border-color: map.get(styles.$theme-colors, 'primary');
+      outline: none;
+    }
+  }
+
+  .btn {
+    border-radius: 0.5rem;
+    font-weight: 500;
+    font-size: 1.08rem;
+    padding: 0.6rem 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  // Button Variants
+  @each $name, $color in styles.$theme-colors {
+    .btn-#{$name} {
+      background: $color;
+      color: if($name == 'warning', color.adjust($color, $blackness: 50%), white);
+    }
+  }
+
+  .alert-info {
+    background: color.adjust(map.get(styles.$theme-colors, 'info'), $lightness: 45%);
+    color: color.adjust(map.get(styles.$theme-colors, 'info'), $blackness: 50%);
+    border: 1px solid color.adjust(map.get(styles.$theme-colors, 'info'), $lightness: 35%);
+    border-radius: 0.5rem;
+  }
+}
+
+.tab-content .list-group-item {
+  background: #f7fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+  // padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.tab-content .table {
+  background: #fff;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+}
+.tab-content .table th,
+.tab-content .table td {
+  border: 1px solid #e2e8f0;
+  padding: 0.75rem 0.5rem;
+}
+.tab-content .table thead {
+  background: #e6fffa;
+}
+/* Modern card style for tab content */
+.tab-content {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  padding: 2rem 1.5rem;
+  margin-bottom: 2.5rem;
+  border: 1px solid #e2e8f0;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.tab-content:focus-within,
+.tab-content:hover {
+  box-shadow: 0 8px 32px rgba(49, 151, 149, 0.1);
+  border-color: #b2f5ea;
+}
+
+/* Center the password prompt overlay */
+.password-prompt-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(35, 78, 82, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.password-prompt-box {
+  background: #fff;
+  padding: 2rem 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+  max-width: 400px;
+  width: 100%;
+}
